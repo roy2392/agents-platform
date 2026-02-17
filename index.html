@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agents Platform — The Future of AI Agents</title>
+    <meta name="description" content="Build, deploy, and orchestrate autonomous AI agents at scale. The platform that powers the next generation of intelligent automation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000000;
+            --text: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #2997ff;
+            --accent-2: #bf5af2;
+            --accent-3: #30d158;
+            --gradient-1: linear-gradient(135deg, #2997ff, #bf5af2);
+            --gradient-2: linear-gradient(135deg, #bf5af2, #ff375f);
+            --gradient-3: linear-gradient(135deg, #30d158, #2997ff);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: var(--bg);
+        }
+
+        /* ===== CURSOR GLOW ===== */
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(41, 151, 255, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 48px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 0.5px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            padding: 7px 18px;
+            border-radius: 980px;
+            background: var(--gradient-1);
+            color: #fff !important;
+            font-weight: 500;
+            font-size: 13px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 30px rgba(41, 151, 255, 0.3);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+
+        .hero-orb-1 {
+            width: 500px; height: 500px;
+            background: var(--accent);
+            top: 10%; left: 15%;
+            animation-delay: 0s;
+        }
+
+        .hero-orb-2 {
+            width: 400px; height: 400px;
+            background: var(--accent-2);
+            top: 30%; right: 10%;
+            animation-delay: -3s;
+        }
+
+        .hero-orb-3 {
+            width: 300px; height: 300px;
+            background: var(--accent-3);
+            bottom: 15%; left: 40%;
+            animation-delay: -5s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 980px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-badge-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            letter-spacing: -3px;
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.5;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            border-radius: 980px;
+            background: var(--gradient-1);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(41, 151, 255, 0.35);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            border-radius: 980px;
+            background: transparent;
+            color: var(--accent);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(41, 151, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(41, 151, 255, 0.1);
+            border-color: var(--accent);
+        }
+
+        /* ===== HERO VISUAL ===== */
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 80px;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .hero-visual-inner {
+            position: relative;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        .hero-visual-inner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.5), transparent);
+        }
+
+        .agent-network {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .agent-node {
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s;
+            overflow: hidden;
+        }
+
+        .agent-node:hover {
+            border-color: rgba(41, 151, 255, 0.3);
+            background: rgba(41, 151, 255, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(41, 151, 255, 0.1);
+        }
+
+        .agent-node-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .agent-node-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .agent-node-status {
+            font-size: 12px;
+            color: var(--accent-3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .agent-node-status::before {
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--accent-3);
+            display: inline-block;
+        }
+
+        .agent-node-bar {
+            margin-top: 12px;
+            height: 3px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.08);
+            overflow: hidden;
+        }
+
+        .agent-node-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: var(--gradient-1);
+            animation: barFill 2s ease-out forwards;
+        }
+
+        @keyframes barFill {
+            from { width: 0; }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== SECTION: STATS TICKER ===== */
+        .stats-section {
+            padding: 80px 24px;
+            border-top: 0.5px solid rgba(255,255,255,0.06);
+            border-bottom: 0.5px solid rgba(255,255,255,0.06);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+            text-align: center;
+        }
+
+        .stat-item .stat-number {
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* ===== SECTION: FEATURES ===== */
+        .features-section {
+            padding: 160px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 540px;
+            line-height: 1.6;
+            margin-bottom: 80px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            position: relative;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 24px;
+            padding: 48px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(41, 151, 255, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(41, 151, 255, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .feature-icon-1 { background: rgba(41, 151, 255, 0.1); }
+        .feature-icon-2 { background: rgba(191, 90, 242, 0.1); }
+        .feature-icon-3 { background: rgba(48, 209, 88, 0.1); }
+        .feature-icon-4 { background: rgba(255, 55, 95, 0.1); }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== FEATURE HIGHLIGHT ===== */
+        .feature-highlight {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            padding: 64px;
+            background: linear-gradient(135deg, rgba(41, 151, 255, 0.05) 0%, rgba(191, 90, 242, 0.05) 100%);
+        }
+
+        .feature-highlight h3 {
+            font-size: 36px;
+            letter-spacing: -1px;
+        }
+
+        .code-block {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-keyword { color: var(--accent-2); }
+        .code-function { color: var(--accent); }
+        .code-string { color: var(--accent-3); }
+        .code-comment { color: var(--text-secondary); }
+
+        /* ===== SECTION: HOW IT WORKS ===== */
+        .how-section {
+            padding: 160px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 80px;
+        }
+
+        .step-card {
+            position: relative;
+            text-align: left;
+        }
+
+        .step-number {
+            font-size: 80px;
+            font-weight: 900;
+            letter-spacing: -4px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .step-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== SECTION: MARQUEE ===== */
+        .marquee-section {
+            padding: 80px 0;
+            overflow: hidden;
+            border-top: 0.5px solid rgba(255,255,255,0.06);
+            border-bottom: 0.5px solid rgba(255,255,255,0.06);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 48px;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            white-space: nowrap;
+            color: rgba(255,255,255,0.06);
+            transition: color 0.3s;
+        }
+
+        .marquee-item:hover { color: rgba(255,255,255,0.15); }
+
+        .marquee-dot {
+            color: var(--accent);
+            margin: 0 16px;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ===== SECTION: TESTIMONIALS ===== */
+        .testimonials-section {
+            padding: 160px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 80px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.4s;
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(41, 151, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-stars {
+            color: #ff9f0a;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== SECTION: CTA ===== */
+        .cta-section {
+            padding: 160px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg-glow {
+            position: absolute;
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-top: 24px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section .btn-primary {
+            padding: 18px 48px;
+            font-size: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 48px 24px;
+            border-top: 0.5px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--text); }
+
+        /* ===== PARTICLE CANVAS ===== */
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-highlight { grid-template-columns: 1fr; }
+            .steps-container { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 16px; }
+            .hero-ctas { flex-direction: column; align-items: center; }
+            .agent-network { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SMOOTH SCROLL SECTIONS ===== */
+        section { position: relative; z-index: 1; }
+
+        /* ===== MAGNETIC BUTTON EFFECT ===== */
+        .magnetic { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* ===== GLOW LINE ===== */
+        .glow-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cursor Glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-logo">⚡ Agents Platform</div>
+    <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#" class="nav-cta magnetic">Get Started</a></li>
+    </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Now in Public Beta
+    </div>
+
+    <h1>
+        Build the future<br>
+        with <span class="gradient-text">AI Agents</span>
+    </h1>
+
+    <p class="hero-subtitle">
+        Deploy autonomous agents that think, reason, and execute. 
+        The platform that powers the next generation of intelligent automation.
+    </p>
+
+    <div class="hero-ctas">
+        <a href="#" class="btn-primary magnetic">Start Building — Free</a>
+        <a href="#" class="btn-secondary magnetic">Watch Demo</a>
+    </div>
+
+    <div class="hero-visual">
+        <div class="hero-visual-inner">
+            <div class="agent-network">
+                <div class="agent-node">
+                    <div class="agent-node-icon">🧠</div>
+                    <div class="agent-node-name">Research Agent</div>
+                    <div class="agent-node-status">Active</div>
+                    <div class="agent-node-bar"><div class="agent-node-bar-fill" style="width:87%"></div></div>
+                </div>
+                <div class="agent-node">
+                    <div class="agent-node-icon">📊</div>
+                    <div class="agent-node-name">Analytics Agent</div>
+                    <div class="agent-node-status">Processing</div>
+                    <div class="agent-node-bar"><div class="agent-node-bar-fill" style="width:62%"></div></div>
+                </div>
+                <div class="agent-node">
+                    <div class="agent-node-icon">🔗</div>
+                    <div class="agent-node-name">Integration Agent</div>
+                    <div class="agent-node-status">Connected</div>
+                    <div class="agent-node-bar"><div class="agent-node-bar-fill" style="width:95%"></div></div>
+                </div>
+                <div class="agent-node">
+                    <div class="agent-node-icon">💬</div>
+                    <div class="agent-node-name">Communication Agent</div>
+                    <div class="agent-node-status">Listening</div>
+                    <div class="agent-node-bar"><div class="agent-node-bar-fill" style="width:78%"></div></div>
+                </div>
+                <div class="agent-node">
+                    <div class="agent-node-icon">🛡️</div>
+                    <div class="agent-node-name">Security Agent</div>
+                    <div class="agent-node-status">Monitoring</div>
+                    <div class="agent-node-bar"><div class="agent-node-bar-fill" style="width:100%"></div></div>
+                </div>
+                <div class="agent-node">
+                    <div class="agent-node-icon">⚙️</div>
+                    <div class="agent-node-name">Orchestrator</div>
+                    <div class="agent-node-status">Running</div>
+                    <div class="agent-node-bar"><div class="agent-node-bar-fill" style="width:91%"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-item reveal">
+            <div class="stat-number" data-target="50000">0</div>
+            <div class="stat-label">Active Agents</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+            <div class="stat-number" data-target="99.9">0</div>
+            <div class="stat-label">Uptime %</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+            <div class="stat-number" data-target="2500">0</div>
+            <div class="stat-label">Companies</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+            <div class="stat-number" data-target="10">0</div>
+            <div class="stat-label">Billion Tasks/Day</div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features-section" id="features">
+    <div class="section-label reveal">Capabilities</div>
+    <h2 class="section-title reveal">
+        Everything you need<br>to orchestrate intelligence.
+    </h2>
+    <p class="section-subtitle reveal">
+        From simple automations to complex multi-agent systems, 
+        Agents Platform gives you the building blocks to create anything.
+    </p>
+
+    <div class="features-grid">
+        <div class="feature-card reveal">
+            <div class="feature-icon feature-icon-1">🧠</div>
+            <h3>Multi-Agent Orchestration</h3>
+            <p>Coordinate dozens of specialized agents working in parallel. Define goals, set constraints, and let the platform handle execution.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon feature-icon-2">⚡</div>
+            <h3>Real-Time Reasoning</h3>
+            <p>Agents analyze, plan, and adapt in milliseconds. Built on cutting-edge LLM infrastructure with sub-100ms response times.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon feature-icon-3">🔌</div>
+            <h3>Universal Integrations</h3>
+            <p>Connect to 500+ tools and services out of the box. APIs, databases, SaaS — your agents speak every protocol.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+            <div class="feature-icon feature-icon-4">🛡️</div>
+            <h3>Enterprise Security</h3>
+            <p>SOC 2 Type II certified. End-to-end encryption, role-based access, and comprehensive audit logs for every agent action.</p>
+        </div>
+
+        <!-- Full-width code card -->
+        <div class="feature-card feature-highlight reveal">
+            <div>
+                <h3>Deploy in minutes,<br>not months.</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-top: 16px;">
+                    Define your agent's capabilities with simple, declarative code. 
+                    Our SDK handles the complexity — you focus on the logic.
+                </p>
+            </div>
+            <div class="code-block">
+                <span class="code-keyword">import</span> { <span class="code-function">Agent</span>, <span class="code-function">Tool</span> } <span class="code-keyword">from</span> <span class="code-string">'@agents/sdk'</span><br><br>
+                <span class="code-keyword">const</span> agent = <span class="code-keyword">new</span> <span class="code-function">Agent</span>({<br>
+                &nbsp;&nbsp;name: <span class="code-string">'research-bot'</span>,<br>
+                &nbsp;&nbsp;model: <span class="code-string">'gpt-5-turbo'</span>,<br>
+                &nbsp;&nbsp;tools: [<span class="code-function">webSearch</span>, <span class="code-function">analyze</span>],<br>
+                &nbsp;&nbsp;memory: <span class="code-keyword">true</span>,<br>
+                })<br><br>
+                <span class="code-keyword">await</span> agent.<span class="code-function">deploy</span>()<br>
+                <span class="code-comment">// 🚀 Live in 30 seconds</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Marquee -->
+<section class="marquee-section">
+    <div class="marquee-track">
+        <span class="marquee-item">Autonomous Agents</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Real-Time Intelligence</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Multi-Modal AI</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Enterprise Ready</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Developer First</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Autonomous Agents</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Real-Time Intelligence</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Multi-Modal AI</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Enterprise Ready</span>
+        <span class="marquee-dot">●</span>
+        <span class="marquee-item">Developer First</span>
+        <span class="marquee-dot">●</span>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section" id="how">
+    <div class="section-label reveal">How It Works</div>
+    <h2 class="section-title reveal">
+        Three steps to<br>autonomous intelligence.
+    </h2>
+
+    <div class="steps-container">
+        <div class="step-card reveal">
+            <div class="step-number">01</div>
+            <h3>Define</h3>
+            <p>Describe your agent's purpose, tools, and constraints using our intuitive SDK or visual builder. No PhD required.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-1">
+            <div class="step-number">02</div>
+            <h3>Deploy</h3>
+            <p>One command to production. Auto-scaling infrastructure handles millions of requests. Zero DevOps needed.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-2">
+            <div class="step-number">03</div>
+            <h3>Evolve</h3>
+            <p>Agents learn from every interaction. Built-in analytics, A/B testing, and continuous improvement loops.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section" id="testimonials">
+    <div class="section-label reveal">What People Say</div>
+    <h2 class="section-title reveal">
+        Loved by engineers<br>and teams worldwide.
+    </h2>
+
+    <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"We replaced 12 microservices with 3 agents. Deployment time went from weeks to minutes. This is the future of backend architecture."</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">S</div>
+                <div>
+                    <div class="testimonial-name">Sarah Chen</div>
+                    <div class="testimonial-role">CTO, DataFlow</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The multi-agent orchestration is mind-blowing. Our customer support agents resolve 89% of tickets autonomously now."</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">M</div>
+                <div>
+                    <div class="testimonial-name">Marcus Rivera</div>
+                    <div class="testimonial-role">VP Engineering, Nexus AI</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Best developer experience I've seen in the AI space. The SDK is beautifully designed and the docs are incredible."</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">A</div>
+                <div>
+                    <div class="testimonial-name">Aisha Patel</div>
+                    <div class="testimonial-role">Staff Engineer, CloudScale</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-bg-glow"></div>
+    <h2 class="reveal">Ready to build<br><span class="gradient-text">the future?</span></h2>
+    <p class="reveal">Start free. Scale infinitely. No credit card required.</p>
+    <a href="#" class="btn-primary magnetic reveal">Get Started Now</a>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-copyright">© 2026 Agents Platform. All rights reserved.</div>
+        <ul class="footer-links">
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">GitHub</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+// ===== CURSOR GLOW =====
+const glow = document.getElementById('cursorGlow');
+let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateGlow() {
+    glowX += (mouseX - glowX) * 0.08;
+    glowY += (mouseY - glowY) * 0.08;
+    glow.style.left = glowX + 'px';
+    glow.style.top = glowY + 'px';
+    requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+// ===== PARTICLES =====
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.3 + 0.1;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+            this.reset();
+        }
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(41, 151, 255, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < 80; i++) {
+    particles.push(new Particle());
+}
+
+function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(41, 151, 255, ${0.05 * (1 - dist / 120)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===== SCROLL REVEAL =====
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// ===== COUNTER ANIMATION =====
+const counters = document.querySelectorAll('.stat-number');
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.dataset.target);
+            const isFloat = target % 1 !== 0;
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function updateCounter(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = target * eased;
+
+                if (isFloat) {
+                    el.textContent = current.toFixed(1) + '%';
+                } else if (target >= 1000) {
+                    el.textContent = Math.floor(current).toLocaleString() + '+';
+                } else {
+                    el.textContent = Math.floor(current).toLocaleString() + 'B+';
+                }
+
+                if (progress < 1) requestAnimationFrame(updateCounter);
+            }
+            requestAnimationFrame(updateCounter);
+            counterObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+counters.forEach(el => counterObserver.observe(el));
+
+// ===== MAGNETIC BUTTONS =====
+document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+    });
+});
+
+// ===== SMOOTH PARALLAX ON SCROLL =====
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            document.querySelectorAll('.hero-orb').forEach((orb, i) => {
+                const speed = (i + 1) * 0.08;
+                orb.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+// ===== NAV SCROLL EFFECT =====
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    const scrollY = window.scrollY;
+    if (scrollY > 100) {
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.12)';
+    } else {
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.08)';
+    }
+    lastScroll = scrollY;
+});
+</script>
+
+</body>
+</html>
