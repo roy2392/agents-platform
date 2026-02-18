@@ -6,21 +6,24 @@ import { DotPattern } from "@/components/magicui/dot-pattern"
 const steps = [
   {
     number: "01",
-    title: "Define",
-    description: "Describe your agent's purpose, tools, and constraints using our intuitive SDK or visual builder. No PhD required.",
+    title: "Prompt",
+    description: "Describe the task or workflow in plain language. What should the agent do? What tools does it need? What are the success criteria?",
     gradient: "from-blue-500 to-cyan-500",
+    detail: "Natural language in, agent architecture out.",
   },
   {
     number: "02",
-    title: "Deploy",
-    description: "One command to production. Auto-scaling infrastructure handles millions of requests. Zero DevOps needed.",
+    title: "Generate",
+    description: "The platform decomposes your prompt into an agent graph — orchestrator, sub-agents, tool bindings, memory config, and evaluation framework. Review and adjust before deploying.",
     gradient: "from-purple-500 to-pink-500",
+    detail: "Full architecture generated in seconds.",
   },
   {
     number: "03",
-    title: "Evolve",
-    description: "Agents learn from every interaction. Built-in analytics, A/B testing, and continuous improvement loops.",
+    title: "Deploy",
+    description: "One click to Azure AI Foundry. Agents are provisioned with Cosmos DB memory, content safety filters, eval pipelines, and a production-ready API endpoint with monitoring.",
     gradient: "from-green-500 to-emerald-500",
+    detail: "Production-ready from the first deployment.",
   },
 ]
 
@@ -37,10 +40,11 @@ export function HowItWorks() {
         >
           <Badge className="mb-4">How It Works</Badge>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter">
-            Three steps to
-            <br />
-            <span className="text-muted-foreground">autonomous intelligence.</span>
+            Prompt. Generate. Deploy.
           </h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
+            Go from idea to deployed agent system on Azure AI Foundry in three steps.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -57,9 +61,10 @@ export function HowItWorks() {
                 {step.number}
               </div>
               <h3 className="text-2xl font-bold mt-2 mb-3">{step.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+              <p className="text-muted-foreground leading-relaxed mb-4">{step.description}</p>
+              <p className="text-sm text-white/40 font-medium italic">{step.detail}</p>
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-12 -right-6 w-12 h-px bg-gradient-to-r from-white/20 to-transparent" />
+                <div className="hidden md:block absolute top-16 -right-6 w-12 h-px bg-gradient-to-r from-white/20 to-transparent" />
               )}
             </motion.div>
           ))}

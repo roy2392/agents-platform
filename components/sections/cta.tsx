@@ -16,10 +16,10 @@ export function CTA() {
           viewport={{ once: true }}
           className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter"
         >
-          Ready to build
+          Stop building plumbing.
           <br />
           <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            the future?
+            Start shipping agents.
           </span>
         </motion.h2>
         <motion.p
@@ -29,7 +29,7 @@ export function CTA() {
           transition={{ delay: 0.1 }}
           className="mt-6 text-lg text-muted-foreground"
         >
-          Start free. Scale infinitely. No credit card required.
+          Describe what your agents should do. We handle the rest.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ export function CTA() {
           className="mt-10"
         >
           <Button variant="glow" size="lg" className="gap-2 group text-base">
-            Get Started Now
+            Get Started
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>

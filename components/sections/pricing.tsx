@@ -4,32 +4,55 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { BorderBeam } from "@/components/magicui/border-beam"
-import { Check, Sparkles } from "lucide-react"
+import { Check } from "lucide-react"
 
 const plans = [
   {
-    name: "Starter",
+    name: "Builder",
     price: "Free",
-    description: "Perfect for exploring and prototyping",
-    features: ["3 Active Agents", "1,000 Tasks/month", "Community Support", "Basic Analytics", "REST API Access"],
-    cta: "Start Free",
+    description: "Explore and prototype agent systems",
+    features: [
+      "3 agent deployments",
+      "1,000 executions / month",
+      "Basic eval metrics",
+      "Community support",
+      "Shared Azure resources",
+    ],
+    cta: "Start Building",
     popular: false,
   },
   {
-    name: "Pro",
-    price: "$49",
+    name: "Team",
+    price: "$149",
     period: "/mo",
-    description: "For teams building production-grade agents",
-    features: ["Unlimited Agents", "100,000 Tasks/month", "Priority Support", "Advanced Analytics", "Custom Integrations", "Multi-Agent Orchestration", "99.9% SLA"],
-    cta: "Start Pro Trial",
+    description: "For teams shipping agents to production",
+    features: [
+      "Unlimited deployments",
+      "50,000 executions / month",
+      "Full eval framework + custom evals",
+      "Cosmos DB memory (dedicated)",
+      "Priority support",
+      "Bring your own Azure subscription",
+      "99.9% SLA",
+    ],
+    cta: "Start Free Trial",
     popular: true,
   },
   {
     name: "Enterprise",
     price: "Custom",
-    description: "For organizations at scale",
-    features: ["Everything in Pro", "Unlimited Tasks", "Dedicated Support", "Custom SLA", "On-premise Option", "SSO & SAML", "Advanced Security", "Custom Training"],
-    cta: "Contact Sales",
+    description: "For organizations operating at scale",
+    features: [
+      "Everything in Team",
+      "Unlimited executions",
+      "Dedicated Azure resources",
+      "SSO, RBAC, audit logs",
+      "Custom guardrails & policies",
+      "Dedicated solutions engineer",
+      "On-premise deployment option",
+      "SLA negotiation",
+    ],
+    cta: "Talk to Us",
     popular: false,
   },
 ]
@@ -46,9 +69,9 @@ export function Pricing() {
         >
           <Badge className="mb-4">Pricing</Badge>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter">
-            Simple, transparent
+            Start free.
             <br />
-            <span className="text-muted-foreground">pricing.</span>
+            <span className="text-muted-foreground">Scale with your agents.</span>
           </h2>
         </motion.div>
 
@@ -64,8 +87,8 @@ export function Pricing() {
               <Card className={`relative p-8 h-full flex flex-col ${plan.popular ? "border-blue-500/30 bg-blue-500/[0.03]" : ""}`}>
                 {plan.popular && <BorderBeam size={200} duration={10} />}
                 {plan.popular && (
-                  <Badge variant="default" className="absolute -top-3 left-1/2 -translate-x-1/2 gap-1">
-                    <Sparkles className="h-3 w-3" /> Most Popular
+                  <Badge variant="default" className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    Most Popular
                   </Badge>
                 )}
                 <div className="mb-6">

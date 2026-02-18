@@ -6,24 +6,24 @@ import { Star } from "lucide-react"
 
 const testimonials = [
   {
-    text: "We replaced 12 microservices with 3 agents. Deployment time went from weeks to minutes. This is the future of backend architecture.",
+    text: "We went from a three-month agent development cycle to deploying production-ready systems in an afternoon. The eval framework alone saved us weeks of custom tooling.",
     name: "Sarah Chen",
     role: "CTO, DataFlow",
-    avatar: "S",
+    avatar: "SC",
     gradient: "from-blue-500 to-cyan-500",
   },
   {
-    text: "The multi-agent orchestration is mind-blowing. Our customer support agents resolve 89% of tickets autonomously now.",
+    text: "The multi-agent orchestration is the real deal. We described our support workflow in plain English and got a deployed system with memory, routing, and human escalation — all wired up.",
     name: "Marcus Rivera",
     role: "VP Engineering, Nexus AI",
-    avatar: "M",
+    avatar: "MR",
     gradient: "from-purple-500 to-pink-500",
   },
   {
-    text: "Best developer experience I've seen in the AI space. The SDK is beautifully designed and the docs are incredible.",
+    text: "Finally, an agent platform that treats evaluation as a first-class citizen. Groundedness and coherence metrics out of the box, plus custom evals for our domain. This is how it should work.",
     name: "Aisha Patel",
     role: "Staff Engineer, CloudScale",
-    avatar: "A",
+    avatar: "AP",
     gradient: "from-green-500 to-emerald-500",
   },
 ]
@@ -37,11 +37,11 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4">What People Say</Badge>
+          <Badge className="mb-4">From the field</Badge>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter">
-            Loved by engineers
+            Trusted by teams
             <br />
-            <span className="text-muted-foreground">and teams worldwide.</span>
+            <span className="text-muted-foreground">shipping agents to production.</span>
           </h2>
         </motion.div>
 
@@ -55,14 +55,14 @@ export function Testimonials() {
               transition={{ delay: i * 0.1 }}
             >
               <Card className="p-8 h-full hover:border-white/[0.15] transition-all duration-500 hover:-translate-y-1">
-                <div className="flex gap-1 mb-4">
+                <div className="flex gap-1 mb-5">
                   {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                    <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
                 <p className="text-[15px] leading-relaxed text-white/80 mb-8">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3 mt-auto">
-                  <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold`}>
+                  <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-bold`}>
                     {t.avatar}
                   </div>
                   <div>

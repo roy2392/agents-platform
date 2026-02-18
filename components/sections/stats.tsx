@@ -3,10 +3,10 @@ import { motion } from "framer-motion"
 import { NumberTicker } from "@/components/magicui/number-ticker"
 
 const stats = [
-  { value: 50000, suffix: "+", label: "Active Agents" },
-  { value: 99, suffix: ".9%", label: "Uptime" },
-  { value: 2500, suffix: "+", label: "Companies" },
-  { value: 10, suffix: "B+", label: "Tasks / Day" },
+  { value: 12000, suffix: "+", label: "Agents Deployed" },
+  { value: 99, suffix: ".9%", label: "Uptime SLA" },
+  { value: 340, suffix: "+", label: "Enterprise Teams" },
+  { value: 47, suffix: "ms", label: "Avg. Latency" },
 ]
 
 export function Stats() {
